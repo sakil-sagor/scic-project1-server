@@ -8,6 +8,9 @@ router
   .post(productsController.createProduct)
   .get(productsController.getallProduct);
 
+// update product
+router.route("/updateProduct/:_id").put(productsController.updateProduct);
+
 // create brand
 router
   .route("/createBrand")

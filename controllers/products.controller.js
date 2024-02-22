@@ -4,6 +4,7 @@ const {
   createBrandService,
   getAllBrandsService,
   getAllProductsDb,
+  putUpdateProductinDb,
 } = require("../services/products.service");
 
 exports.createProduct = async (req, res) => {
@@ -80,6 +81,24 @@ exports.getallProduct = async (req, res) => {
       status: "fail",
       message: "Couldn't find",
       error: error.message,
+    });
+  }
+};
+
+// update  product
+exports.updateProduct = async (req, res) => {
+  try {
+    const { _id } = req.params;
+
+    const allProduct = await putUpdateProductinDb(_id, req.body);
+    res.status(200).json({
+      status: "success",
+      data: allProduct,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      error: "Couldn't get the Products",
     });
   }
 };

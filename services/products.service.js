@@ -21,3 +21,9 @@ exports.getAllBrandsService = async () => {
   const result = await Brand.find({});
   return result;
 };
+
+// update products
+exports.putUpdateProductinDb = async (productId, details) => {
+  const result = await Product.updateOne({ _id: productId }, { $set: details });
+  return result;
+};
