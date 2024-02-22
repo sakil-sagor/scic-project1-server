@@ -3,7 +3,10 @@ const productsController = require("../../controllers/products.controller");
 
 const router = express.Router();
 // create single products
-router.route("/create").post(productsController.createProduct);
+router
+  .route("/create")
+  .post(productsController.createProduct)
+  .get(productsController.getallProduct);
 
 // create brand
 router

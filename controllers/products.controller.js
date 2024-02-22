@@ -3,6 +3,7 @@ const {
   createProductService,
   createBrandService,
   getAllBrandsService,
+  getAllProductsDb,
 } = require("../services/products.service");
 
 exports.createProduct = async (req, res) => {
@@ -50,8 +51,25 @@ exports.createBrand = async (req, res) => {
     });
   }
 };
-// create brands
+//all products
 exports.getAllBrands = async (req, res) => {
+  try {
+    const getAllBrand = await getAllProductsDb();
+    console.log(getAllBrand);
+    res.status(200).json({
+      status: "success",
+      data: getAllBrand,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: "Couldn't find",
+      error: error.message,
+    });
+  }
+};
+// get all products
+exports.getallProduct = async (req, res) => {
   try {
     const getAllBrand = await getAllBrandsService();
     console.log(getAllBrand);

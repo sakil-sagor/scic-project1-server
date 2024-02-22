@@ -6,6 +6,12 @@ exports.createProductService = async (detials) => {
   console.log(result);
   return result;
 };
+// get all brands
+exports.getAllProductsDb = async () => {
+  const result = await Product.find({});
+  return result;
+};
+
 exports.createBrandService = async (detials) => {
   const result = await Brand.create(detials);
   return result;
