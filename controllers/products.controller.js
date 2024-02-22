@@ -51,11 +51,10 @@ exports.createBrand = async (req, res) => {
     });
   }
 };
-//all products
+//all brands
 exports.getAllBrands = async (req, res) => {
   try {
-    const getAllBrand = await getAllProductsDb();
-    console.log(getAllBrand);
+    const getAllBrand = await getAllBrandsService();
     res.status(200).json({
       status: "success",
       data: getAllBrand,
@@ -71,8 +70,7 @@ exports.getAllBrands = async (req, res) => {
 // get all products
 exports.getallProduct = async (req, res) => {
   try {
-    const getAllBrand = await getAllBrandsService();
-    console.log(getAllBrand);
+    const getAllBrand = await getAllProductsDb();
     res.status(200).json({
       status: "success",
       data: getAllBrand,
