@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const AddtoCartProduct = require("../models/AddtoCartProduct");
 const Product = require("../models/Product");
 const {
@@ -7,6 +8,7 @@ const {
   getAllProductsDb,
   putUpdateProductinDb,
   addtoCartDb,
+  singleCartEmailDb,
 } = require("../services/products.service");
 
 exports.createProduct = async (req, res) => {
@@ -133,6 +135,36 @@ exports.addtoCart = async (req, res) => {
     res.status(500).json({
       status: "fail",
       message: "Couldn't create Cart",
+      error: error.message,
+    });
+  }
+};
+
+// find cart for single email
+
+exports.singleCartEmail = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    const results = await AddtoCartProduct.find({
+      email: email,
+    }).select({ id: 1, _id: 0 });
+
+    // console.log(results);
+    let productsList = [];
+    for (let product of results) {
+      const allCart = await singleCartEmailDb(product?.id);
+      productsList.push(allCart);
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: productsList,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: "Couldn't find",
       error: error.message,
     });
   }

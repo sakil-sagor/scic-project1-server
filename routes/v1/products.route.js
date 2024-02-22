@@ -18,6 +18,9 @@ router
   .get(productsController.getAllBrands);
 
 // add to addToCart
-router.route("/addToCart").post(productsController.addtoCart);
+router
+  .route("/addToCart")
+  .post(productsController.addtoCart)
+  .get(productsController.singleCartEmail);
 
 module.exports = router;

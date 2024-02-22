@@ -1,6 +1,8 @@
+const { ObjectId } = require("mongodb");
 const AddtoCartProduct = require("../models/AddtoCartProduct");
 const Brand = require("../models/Brand");
 const Product = require("../models/Product");
+const { default: mongoose } = require("mongoose");
 
 exports.createProductService = async (detials) => {
   const result = await Product.create(detials);
@@ -32,5 +34,10 @@ exports.putUpdateProductinDb = async (productId, details) => {
 // add to cart
 exports.addtoCartDb = async (detials) => {
   const result = await AddtoCartProduct.create(detials);
+  return result;
+};
+// find Cart for signle email
+exports.singleCartEmailDb = async (id) => {
+  const result = await Product.findOne({ _id: id });
   return result;
 };
