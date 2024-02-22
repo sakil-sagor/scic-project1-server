@@ -1,3 +1,4 @@
+const AddtoCartProduct = require("../models/AddtoCartProduct");
 const Brand = require("../models/Brand");
 const Product = require("../models/Product");
 
@@ -25,5 +26,11 @@ exports.getAllBrandsService = async () => {
 // update products
 exports.putUpdateProductinDb = async (productId, details) => {
   const result = await Product.updateOne({ _id: productId }, { $set: details });
+  return result;
+};
+
+// add to cart
+exports.addtoCartDb = async (detials) => {
+  const result = await AddtoCartProduct.create(detials);
   return result;
 };

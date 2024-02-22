@@ -17,4 +17,7 @@ router
   .post(productsController.createBrand)
   .get(productsController.getAllBrands);
 
+// add to addToCart
+router.route("/addToCart").post(productsController.addtoCart);
+
 module.exports = router;

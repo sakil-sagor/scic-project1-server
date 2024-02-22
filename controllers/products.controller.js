@@ -1,3 +1,4 @@
+const AddtoCartProduct = require("../models/AddtoCartProduct");
 const Product = require("../models/Product");
 const {
   createProductService,
@@ -5,6 +6,7 @@ const {
   getAllBrandsService,
   getAllProductsDb,
   putUpdateProductinDb,
+  addtoCartDb,
 } = require("../services/products.service");
 
 exports.createProduct = async (req, res) => {
@@ -99,6 +101,39 @@ exports.updateProduct = async (req, res) => {
     res.status(400).json({
       status: "fail",
       error: "Couldn't get the Products",
+    });
+  }
+};
+
+// create add to cart products
+exports.addtoCart = async (req, res) => {
+  try {
+    const useremail = req.body.email;
+    const productId = req.body.id;
+
+    const resulttt = await AddtoCartProduct.find({
+      email: useremail,
+      id: productId,
+    });
+
+    if (resulttt.length === 0) {
+      const createdAddtoCart = await addtoCartDb(req.body);
+      res.status(200).json({
+        status: "success",
+        message: "Successfully Added product in Cart",
+      });
+    } else {
+      res.status(500).json({
+        status: "fail",
+        message: "Couldn't create Cart",
+        error: error.message,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: "Couldn't create Cart",
+      error: error.message,
     });
   }
 };
