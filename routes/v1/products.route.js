@@ -5,4 +5,7 @@ const router = express.Router();
 // create single products
 router.route("/create").post(productsController.createProduct);
 
+// create brand
+router.route("/createBrand").post(productsController.createBrand);
+
 module.exports = router;
