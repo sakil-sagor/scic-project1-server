@@ -6,6 +6,9 @@ const router = express.Router();
 router.route("/create").post(productsController.createProduct);
 
 // create brand
-router.route("/createBrand").post(productsController.createBrand);
+router
+  .route("/createBrand")
+  .post(productsController.createBrand)
+  .get(productsController.getAllBrands);
 
 module.exports = router;
